@@ -1,0 +1,78 @@
+
+
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Purplle</title>
+ <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript">
+$(document).ready(function(){
+       
+         });
+ function purplle()
+
+
+        {
+             var lt = document.getElementById('latitude').value;
+              var lg = document.getElementById('longitude').value;
+          window.location.href = "purplle.php?latitude=" + lt + "&longitude=" + lg;
+
+            
+            
+        }
+  </script>
+
+</head>
+<body>
+
+  
+  <div id="map" style="width:1200px; height:500px"></div>
+   <input type="text" id="latitude" placeholder="latitude" value="19.067179820534243">
+  <input type="text" id="longitude" placeholder="longitude" value="72.87798505859382">
+
+  
+  <button onclick="purplle()">Search</button>
+  
+
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script>
+  function initialize() {
+    var $latitude = document.getElementById('latitude');
+    var $longitude = document.getElementById('longitude');
+    var latitude = 19.067179820534243 ;
+    var longitude = 72.87798505859382;
+    var zoom = 13;
+    
+    var LatLng = new google.maps.LatLng(latitude, longitude);
+    
+    var mapOptions = {
+      zoom: zoom,
+      center: LatLng,
+      panControl: false,
+      zoomControl: false,
+      scaleControl: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }  
+    
+    var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+    
+    var marker = new google.maps.Marker({
+      position: LatLng,
+      map: map,
+      title: 'Drag Me!',
+      draggable: true
+    });
+    
+    google.maps.event.addListener(marker, 'dragend', function(marker){
+      var latLng = marker.latLng;
+      $latitude.value = latLng.lat();
+      $longitude.value = latLng.lng();
+    });
+    
+  }
+  initialize();
+  </script>
+  
+  
+</body>
+</html>
